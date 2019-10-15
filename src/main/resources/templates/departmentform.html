@@ -19,7 +19,7 @@
 <!--<div style="width: 1000px;height: 600px;margin-left: 300px;" class="row">-->
 
 <br/><br/>
-    <form action="#" th:action="@{/process}" th:object="${department}" method="post">
+    <form action="#" enctype="multipart/form-data" th:action="@{/process}" th:object="${department}" method="post">
 
         <input type="hidden" th:field="*{id}" />
 
@@ -31,6 +31,7 @@
 
         <span th:if="${#fields.hasErrors('headname')}" th:errors="*{headname}"></span>
         <br>
+        <input hidden="hidden" style="margin:10px; border-radius: 5px;" type="file" name="file" id="file">
         <input type="submit" value="Submit" class="btn btn-primary btn-lg" role="button"/>&nbsp;&nbsp;&nbsp;&nbsp;
         <a style="margin-top: 10px;" href="/" class="btn btn-primary btn-lg" role="button">See All information of the company. </a><br/>
 

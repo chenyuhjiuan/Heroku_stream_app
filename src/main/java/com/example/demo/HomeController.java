@@ -42,10 +42,23 @@ public class HomeController {
 
 
     @PostMapping("/process")
-    public String processDepartmentForm(@Valid Department department, BindingResult result){
-
+    public String processDepartmentForm(@RequestParam(value = "file", required = true) MultipartFile file,@Valid Department department, BindingResult result,Model m){
         if (result.hasErrors()){
-            return "departmentform"; }
+            m.addAttribute("department", departmentRepository.findAll());
+            return "departmentform";
+        }
+        if (file.isEmpty()){
+            return "departmentform";
+        }
+        try {
+            Map uploadResult =cloudc.upload(file.getBytes(),
+                    ObjectUtils.asMap("resourcetype", "auto"));
+            department.setHeadshot(uploadResult.get("url").toString());
+            departmentRepository.save(department);
+        } catch (IOException e){
+            e.printStackTrace();
+            return "departmentform";
+        }
 
         departmentRepository.save(department);
 

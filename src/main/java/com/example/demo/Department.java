@@ -15,6 +15,7 @@ public class Department {
     /*@NotNull
     @Size(min=3)*/
     private String headname;
+    private String headshot;
     @OneToMany(mappedBy = "department",cascade = CascadeType.REMOVE, orphanRemoval = true)
     public Set<Employee> employees;
 
@@ -50,7 +51,13 @@ public class Department {
         this.depname = depname;
     }
 
+    public String getHeadshot() {
+        return headshot;
+    }
 
+    public void setHeadshot(String headshot) {
+        this.headshot = headshot;
+    }
 
     public Set<Employee> getEmployees() {
         return employees;
